@@ -1,4 +1,4 @@
-Hosted at https://thinkful-ei-iguana.github.io/bookmark-project-Anugrah/
+Hosted at https://thinkful-ei-iguana.github.io/Bookmark-App-AnugrahLambogo/
 
 User Stories
 As a user:
