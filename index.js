@@ -1,4 +1,5 @@
 /* eslint-disable indent */
+import $ from 'jquery';
 import api from './api.js';
 import store from './store.js';
 import bookmarks from './bookmarks.js';
