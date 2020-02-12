@@ -1,7 +1,7 @@
 /* eslint-disable indent */
-import api from './api';
-import store from './store';
-import bookmarks from './bookmarks';
+import api from './api.js';
+import store from './store.js';
+import bookmarks from './bookmarks.js';
 import './index.css';
 
 
