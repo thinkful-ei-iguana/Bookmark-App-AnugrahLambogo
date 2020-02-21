@@ -10,7 +10,7 @@ const generateBookmarkElement = function(bookmarkObj) {
     if (bookmarkObj.expanded === false) {
         return ` <div class="bookmark ${bookmarkObj.rating}" id="${bookmarkObj.id}">
                     <button class ="title" id="${bookmarkObj.id}">${bookmarkObj.title}</button>
-                    ${bookmarkObj.rating} <img src="https://www.clipartwiki.com/clipimg/full/21-219855_gold-stars-png-transparent-background-gold-star.png" alt="small icon of a star" class="ratingImg">
+                    ${bookmarkObj.rating} <img src="https://p7.hiclipart.com/preview/897/847/590/royalty-free-star-clip-art-gold-star.jpg" alt="small icon of a star" class="ratingImg">
                     <button class="delete" id="${bookmarkObj.id}">DELETE</button>
                     </div>`
     }
@@ -18,7 +18,7 @@ const generateBookmarkElement = function(bookmarkObj) {
     return ` <div class="bookmark ${bookmarkObj.rating}" id="${bookmarkObj.id}">
                 <button class ="title" id="${bookmarkObj.id}">${bookmarkObj.title}</button>
                 <button class="link" href="${bookmarkObj.url}">Take me there!</button>
-                ${bookmarkObj.rating} <img src="https://www.clipartwiki.com/clipimg/full/21-219855_gold-stars-png-transparent-background-gold-star.png" alt="small icon of a star" class="ratingImg"/>
+                ${bookmarkObj.rating} <img src="https://p7.hiclipart.com/preview/897/847/590/royalty-free-star-clip-art-gold-star.jpg" alt="small icon of a star" class="ratingImg"/>
                 <p class="description">${bookmarkObj.desc}</p>
                 <button class="delete" id="${bookmarkObj.id}">DELETE</button>
             </div>`
