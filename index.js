@@ -15,7 +15,7 @@ const main = function() {
             bookmarks.render();
         });
 
-    bookmarks.bindEventListeners();
+    bookmarks.eventListeners();
     bookmarks.render();
 
 };
