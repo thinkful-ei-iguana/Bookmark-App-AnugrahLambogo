@@ -3,10 +3,14 @@ import store from './store.js';
 import api from './api.js';
 
 
+
+
+
 //function to generate the HTML elements for the bookmark
 //objects in store
 const generateBookmarkElement = function(bookmarkObj) {
     console.log('generateBookmarkElement has been ran!');
+    console.log('this bookmark url is:', bookmarkObj.url)
     if (bookmarkObj.expanded === false) {
         return ` <div class="bookmark ${bookmarkObj.rating}" id="${bookmarkObj.id}">
                     <button class ="title" id="${bookmarkObj.id}">${bookmarkObj.title}</button>
@@ -17,7 +21,7 @@ const generateBookmarkElement = function(bookmarkObj) {
 
     return ` <div class="bookmark ${bookmarkObj.rating}" id="${bookmarkObj.id}">
                 <button class ="title" id="${bookmarkObj.id}">${bookmarkObj.title}</button>
-                <button class="link" href="${bookmarkObj.url}">Take me there!</button>
+                <a href="${bookmarkObj.url}">Take me there!</a>
                 ${bookmarkObj.rating} <img src="https://p7.hiclipart.com/preview/897/847/590/royalty-free-star-clip-art-gold-star.jpg" alt="small icon of a star" class="ratingImg"/>
                 <p class="description">${bookmarkObj.desc}</p>
                 <button class="delete" id="${bookmarkObj.id}">DELETE</button>
@@ -28,6 +32,7 @@ const generateBookmarkElement = function(bookmarkObj) {
 //function to put together the bookmark html elements into one block
 const generateBookmarkListString = function(bookmarkArr) {
     console.log('generateBookmarkListString has been run!');
+    console.log('bookmarkArr: ', bookmarkArr);
     const list = bookmarkArr.map((item) => generateBookmarkElement(item));
     return list.join('');
 };
@@ -85,7 +90,6 @@ const generateExpandedview = function() {
     $('.title').click(function () {
         console.log('generateExpandedview just ran')
         let id = $(this).attr('id');
-        console.log(id);
         store.toggleExpand(id);
         render();
     })
@@ -169,14 +173,15 @@ const submitNewBookmark = function() {
         newBookmark.url = $('#bookmarkURL').val();
         newBookmark.desc = $('#descriptionBox').val();
         newBookmark.rating = $('#ratingTool').val();
+        newBookmark.expanded = false;
+        newBookmark.id = store.state.bookmarks.length;
 
         api.createBookmark(newBookmark)    
         .then(() => {store.addBookmark(newBookmark);})
         .then(() => {render();})
-        .then(response => response.json())  
         .catch(err => {
             console.log('catch block running');
-            $('#addNew').append(`<p>Invalid entry: ${err.message}, Title and URl required (include Https://)</p>`);
+            $('#addNew').append(`<p>Invalid entry: ${err.message}, </p>`);
             });
     })
 };
@@ -216,4 +221,4 @@ export default {
     generateAddMenuElements,
     generateExpandedview,
     eventListeners
-}
+};
