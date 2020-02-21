@@ -1,7 +1,6 @@
 /* eslint-disable indent */
 import store from './store.js';
 import api from './api.js';
-import { filter } from 'minimatch';
 
 
 //function to generate the HTML elements for the bookmark
