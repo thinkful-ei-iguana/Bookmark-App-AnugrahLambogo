@@ -7,7 +7,7 @@ import './index.css';
 
 
 const main = function() {
-
+    console.log('we are finally in');
     api.getBookmark()
         .then(res => res.json())
         .then((items) => {
