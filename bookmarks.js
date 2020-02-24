@@ -10,7 +10,7 @@ import api from './api.js';
 //objects in store
 const generateBookmarkElement = function(bookmarkObj) {
     console.log('generateBookmarkElement has been ran!');
-    console.log('this bookmark url is:', bookmarkObj.url)
+    console.log('this filter num', store.state.filter)
     if (bookmarkObj.expanded === false) {
         return ` <div class="bookmark ${bookmarkObj.rating}" id="${bookmarkObj.id}">
                     <button class ="title" id="${bookmarkObj.id}">${bookmarkObj.title}</button>
@@ -54,6 +54,14 @@ if (currState.adding === true) {
 
 const bookmarkListString = generateBookmarkListString(currState.bookmarks);
 $('#bookmarkList').html(bookmarkListString);
+    for (let i = 1; i<=5; i++){
+        if(i < store.state.filter) {
+          $(`.${i}`).addClass('hidden'); 
+        }
+        else {
+          $(`.${i}`).removeClass('hidden'); 
+        }
+    }
 generateExpandedview();
 deleteButton();
 filterBookmarks();
@@ -68,11 +76,12 @@ const filterBookmarks = function() {
     $('.filter').change(function() {
         let filterNum = $('.filter').val();
         console.log(filterNum);  
-        for (let i = 1; i<filterNum; i++){
-        $(`.${i}`).addClass('hidden'); 
-        }}
-    )
-}
+        store.toggleFilter(filterNum);
+        render();
+    })
+    }
+    
+
 
 
 
@@ -90,7 +99,7 @@ const generateExpandedview = function() {
     $('.title').click(function () {
         console.log('generateExpandedview just ran')
         let id = $(this).attr('id');
-        store.toggleExpand(id);
+        store.toggleExpand(id)
         render();
     })
 
@@ -159,16 +168,18 @@ const generateAddMenuElements = function() {
                 
                 <button type="submit">Create</button>
                 <button type="reset" id="cancelButton">Cancel</button>
+                <div id="errorMsg"></div>
             </form>`;
 }
 
 //event listener to submit new bookmark info
 const submitNewBookmark = function() {
     console.log('submitNewBookmark ran!');
+    
     $('#addNew').submit(function (event) {
         event.preventDefault();
         const newBookmark = {};
-
+        $('#errorMsg').empty()
         newBookmark.title = $('#bookmarkTitle').val();
         newBookmark.url = $('#bookmarkURL').val();
         newBookmark.desc = $('#descriptionBox').val();
@@ -181,7 +192,7 @@ const submitNewBookmark = function() {
         .then(() => {render();})
         .catch(err => {
             console.log('catch block running');
-            $('#addNew').append(`<p>Invalid entry: ${err.message}, </p>`);
+            $('#errorMsg').append(`<p>Invalid entry: ${err.message}, </p>`);
             });
     })
 };

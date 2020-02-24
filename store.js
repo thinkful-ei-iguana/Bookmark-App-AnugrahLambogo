@@ -9,7 +9,6 @@ const state = {
 //function to add new bookmark objects in to the store
 
 const addBookmark = function(bookmarkObj) {
-    bookmarkObj.expanded = false;
     return state.bookmarks.push(bookmarkObj);
 }
 
@@ -35,11 +34,13 @@ const toggleError = function() {}
 
 //function to toggle expanded view of a bookmark obj
 const toggleExpand = function(id) {
-    let bmArray = state.bookmarks;
-    let targetBm = bmArray.find((bm) => (bm.id === id));
-    targetBm.expanded = !targetBm.expanded;
+    let targetBmIndex = state.bookmarks.findIndex((bm) => bm.id == id);
+    state.bookmarks[targetBmIndex].expanded = !state.bookmarks[targetBmIndex].expanded;
 }
 
+const toggleFilter = function(filterNum) {
+  state.filter = filterNum;
+}
 
 
 
@@ -50,5 +51,6 @@ export default {
     toggleAddMenu,
     toggleError,
     toggleExpand,
-    deleteBookmark
-}
+    deleteBookmark,
+    toggleFilter
+};

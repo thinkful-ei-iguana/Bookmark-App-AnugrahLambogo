@@ -3,20 +3,23 @@
 import api from './api.js';
 import store from './store.js';
 import bookmarks from './bookmarks.js';
-
+console.log('help');
 
 const main = function() {
     console.log('we are finally in');
+    bookmarks.eventListeners();
+
     api.getBookmark()
-        .then(res => res.json())
         .then((items) => {
-            items.forEach((item) => store.addBookmark(item));
+            items.forEach((item) => {
+              item.expanded = false;
+              store.addBookmark(item)});
             bookmarks.render();
         });
 
-    bookmarks.eventListeners();
     bookmarks.render();
 
 };
+
 
 $(main);
